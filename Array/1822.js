@@ -23,6 +23,8 @@
 // Output: -1
 // Explanation: The product of all values in the array is -1, and signFunc(-1) = -1
 
+
+// BFS approach
 function arraySign(nums) {
   let product = 1;
   function signFunc(result) {
@@ -44,6 +46,26 @@ function arraySign(nums) {
   return signFunc(product);
 }
 
-let nums = [-1, -2, -3, -4, 3, 2, -1 , 0];
+let nums = [-1, -2, -3, -4, 3, 2, 1 ,];
 
-console.log(arraySign(nums));
+
+
+// optimised my version 
+
+function arraySign2(nums) {
+  let negetiveCounter = 0;
+
+  for (let i = 0; i < nums.length; i++){
+    if (nums[i] === 0){
+      return 0
+    }else if (nums[i] < 0){
+      negetiveCounter++;
+      console.log(negetiveCounter)
+    }
+  }
+  
+  return (negetiveCounter % 2 ? -1 : 1)
+}
+
+
+console.log(arraySign2(nums));

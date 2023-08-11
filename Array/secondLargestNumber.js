@@ -12,7 +12,7 @@ function secondLargestFun(arr) {
     if (arr[i] > firstLargest) {
       secondLargest = firstLargest;
       firstLargest = arr[i];
-    } else if (arr[i] > secondLargest) {
+    } else if (arr[i] > secondLargest && arr[i] < firstLargest) {
       secondLargest = arr[i];
     }
   }
@@ -21,7 +21,7 @@ function secondLargestFun(arr) {
 }
 
 
-let arr2 = [ 0]
+let arr2 = [ 2,3,6,6,5]
 
 console.log(secondLargestFun(arr2));
 

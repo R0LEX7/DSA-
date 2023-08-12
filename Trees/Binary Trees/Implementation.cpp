@@ -14,20 +14,23 @@ public:
     }
 };
 
-// void preOrder(Node* root){
-
-//     Node* temp= root;
-    
-//         cout<<temp->data<<endl;
-//     while(temp->left!=  NULL || temp->right!= NULL){
-
-//         cout<<temp->left->data<<endl;
-//         cout<<temp->right->data<<endl;
-//         temp = 
-//     }
-// }
 
 // preorder traversal(root left right)
+
+void iterativePreOrder(Node* root){
+
+    stack<Node*> st;
+    st.push(root);
+
+    while(!st.empty()){
+        Node* temp= st.top();
+        st.pop();
+        cout<<temp->data<<" ";
+        if(temp->right != NULL) st.push(temp->right);
+        if(temp->left != NULL) st.push(temp->left);
+    }  
+}
+
 void preOrder(Node *root){
     // base case
     if(root == NULL ){
@@ -40,6 +43,26 @@ void preOrder(Node *root){
 }
 
 // postorder traversal (left right root)
+void iterativePostOrder(Node* root){
+
+    stack<Node*> st1, st2;
+    st1.push(root);
+
+    while(!st1.empty()){
+        Node* temp= st1.top();
+        st1.pop();
+        st2.push(temp);
+
+        if(temp->left != NULL) st1.push(temp->left);
+        if(temp->right != NULL) st1.push(temp->right);
+    }  
+
+    while(!st2.empty()){
+        Node* temp= st2.top();
+        cout<<temp->data<<" ";
+        st2.pop(); 
+    }
+}
 void postOrder(Node *root){
     // base case
     if(root == NULL ){
@@ -52,6 +75,31 @@ void postOrder(Node *root){
 }
 
 // inorder traversal (left root right)
+
+vector<int> iterativeInOrder(Node *root){
+
+    vector<int> ans;
+    if(root == NULL){
+        return ans;
+    }
+    
+    stack<Node*> st;
+    Node* node = root;
+    while(1){
+        if(node != NULL){
+            st.push(node);
+            node = node->left;
+        }else{
+            if(st.empty() == true) break;
+            node = st.top();
+            st.pop();
+            ans.push_back(node->data);
+            node = node->right;
+        }
+    }
+    return ans;
+}
+
 void inOrder(Node *root){
     // base case
     if(root == NULL ){
@@ -123,13 +171,33 @@ int main(){
     vector<vector<int>> ans = levelOrder(a);
 
     for(int i=0;i<ans.size();i++){
-        cout<<endl;
+        // cout<<endl;
         for (int j = 0; j < ans[i].size(); j++)
         {
             cout<<ans[i][j]<<" ";
         }
         
     }
+
+    cout<<endl;
+    cout<<"XXXXXXXXXXXXXXXXXXXXXXXXX"<<endl;
+    cout<<"Iterative preorder"<<endl;
+    iterativePreOrder(a);
+
+    cout<<endl;
+    cout<<"XXXXXXXXXXXXXXXXXXXXXXXXX"<<endl;
+    cout<<"Iterative postorder"<<endl;
+    iterativePostOrder(a);
+
+    cout<<endl;
+    cout<<"XXXXXXXXXXXXXXXXXXXXXXXXX"<<endl;
+    cout<<"Iterative inorder"<<endl;
+    vector<int> inorder = iterativeInOrder(a);
+
+    for(auto x : inorder){
+        cout<<x<<" ";
+    }
+    
 
     return 0;
 }

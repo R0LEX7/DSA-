@@ -139,6 +139,56 @@ vector<vector<int>> levelOrder(Node *root){
     return ans;
 }
 
+// maximum depth of binary tree;
+
+int maxDepth(Node* root){
+    // base case
+    if(root == NULL) return 0;
+
+    int lh = maxDepth(root->left);
+    int rh = maxDepth(root->right);
+    
+    return 1 + max(lh, rh);
+}
+
+
+// // Balanced Binary tree -> A balanced binary tree, also referred to as a height-balanced binary tree, is defined as a binary tree in which the height of the left and right subtree of any node differ by not more than 1. (lh - rh <= 1)
+
+int dfsDepth(Node* root){
+    // base case
+    if(root == NULL) return 0;
+
+    int lh = dfsDepth(root->left);
+    if(lh == -1) return -1;
+    int rh = dfsDepth(root->right);
+    if(rh == -1) return -1;
+
+    if(abs(lh - rh )> 1) return -1;
+    return 1 + max(lh, rh);
+}
+
+bool isBalanced(Node *root) {
+    return dfsDepth(root) != -1;
+}
+
+// Diameter of the Binary tree -> The diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the root .
+
+int depth(Node *root , int& diameter) {
+    // base case
+    if(root == NULL) return 0;
+    int lh = depth(root->left, diameter);
+    int rh = depth(root->right, diameter);
+
+    diameter = max(diameter, lh+rh);
+    return 1+ max(lh,rh);
+}
+
+int diameterOfBinaryTree(Node *root){
+    int diameter = 0;
+    depth(root, diameter); 
+    return diameter;
+}
+
 int main(){
     Node* a = new Node(20);
     Node* b = new Node(5);
@@ -154,7 +204,7 @@ int main(){
     b->right = e;
     c->left = f;
     c->right = g;
-
+/*
     cout<<"XXXXXXXXXXXXXXXXXXXXXXXXX"<<endl;
     cout<<"PreOrder traversal"<<endl;
     preOrder(a);
@@ -196,8 +246,18 @@ int main(){
 
     for(auto x : inorder){
         cout<<x<<" ";
+    } 
+    */
+
+    int h = maxDepth(a);
+    cout<<"Max depth: "<<h<<endl;  
+    if(isBalanced(a)){
+        cout<<"Balanced Binary Tree: "<<endl;
+    }else{
+        cout<<"Unbalanced Binary Tree: "<<endl;
     }
-    
+
+    cout<<"Diameter of Binary Tree: "<<diameterOfBinaryTree(a)<<endl;
 
     return 0;
 }

@@ -1,0 +1,25 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+	  {
+		"label": "Build & Run C++",
+		"type": "shell",
+		"command": "g++",
+		"args": [
+		  "-std=c++20",
+		  "-g",
+		  "${file}",
+		  "-o",
+		  "${fileDirname}/out.exe",
+		  "&&",
+		  "${fileDirname}/out.exe"
+		],
+		"group": {
+		  "kind": "build",
+		  "isDefault": true
+		},
+		"problemMatcher": ["$gcc"],
+		"detail": "Compile and Run C++ in one step"
+	  }
+	]
+  }

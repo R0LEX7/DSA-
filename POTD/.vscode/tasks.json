@@ -1,0 +1,28 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+	  {
+		"label": "Build and Run C++ (MSYS2)",
+		"type": "shell",
+		"command": "g++",
+		"args": [
+		  "-std=c++20",
+		  "-g",
+		  "${file}",
+		  "-o",
+		  "${fileDirname}/${fileBasenameNoExtension}.exe",
+		  "&&",
+		  "./${fileBasenameNoExtension}.exe"
+		],
+		"options": {
+		  "cwd": "${fileDirname}"
+		},
+		"problemMatcher": ["$gcc"],
+		"group": {
+		  "kind": "build",
+		  "isDefault": true
+		},
+		"detail": "Build and run C++ file with MSYS2 terminal"
+	  }
+	]
+  }
